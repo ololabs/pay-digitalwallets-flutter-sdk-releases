@@ -1,0 +1,105 @@
+# DO NOT RUN THIS MANUALLY - THIS GETS RUN AS PART OF A DIFFERENT GH ACTIONS SCRIPT
+
+name: Publish Release to Pub.dev
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+*"
+
+env:
+  FLUTTER_VERSION: 3.29.0
+  MAIN_PKG_PATH: "src/pay_digitalwallets_sdk"
+  INTERFACE_PKG_PATH: "src/pay_digitalwallets_sdk_platform_interface"
+  ANDROID_PKG_PATH: "src/pay_digitalwallets_sdk_android"
+  IOS_PKG_PATH: "src/pay_digitalwallets_sdk_ios"
+
+jobs:
+  Release-It-To-The-People:
+    runs-on: ubuntu-latest
+    environment: live_pub_dev
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: "Test Release Check"
+        id: test-release-check
+        run: |
+          echo ""
+          if [[ "${{ github.repository_owner }}" == *"ololabs-playground"* ]]
+          then
+            echo "is-test=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is-test=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: "Checkout Project"
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v3.6
+        with:
+          channel: stable
+          version: ${{ env.FLUTTER_VERSION }}
+
+      - name: "Setup Pub.dev Token Authentication"
+        if: ${{ steps.test-release-check.outputs.is-test == 'false' }}
+        uses: dart-lang/setup-dart@v1
+
+      #######################################
+      ## DRY RUN PUBLISHES FOR TEST RELEASES
+      #######################################
+      - name: "Publish Dry Run (Test Releases Only)"
+        if: ${{ steps.test-release-check.outputs.is-test == 'true' }}
+        run: |
+          echo ""
+          packages=(
+            "${{ env.INTERFACE_PKG_PATH }}"
+            "${{ env.ANDROID_PKG_PATH }}"
+            "${{ env.IOS_PKG_PATH }}"
+            "${{ env.MAIN_PKG_PATH }}"
+          )
+
+          for pkg in "${packages[@]}"; do
+            echo "::group::🔵 Dry Run Publish: $pkg"
+            cd ${{ github.workspace }}/$pkg
+            flutter pub publish --dry-run
+            cd ${{ github.workspace }}
+            echo "::endgroup::"
+            echo ""
+          done
+
+      #######################################
+      ## PUBLISH PACKAGES
+      #######################################
+      - name: "Publish Release: Platform Interface"
+        if: ${{ steps.test-release-check.outputs.is-test == 'false' }}
+        run: |
+          echo ""
+          cd src/pay_digitalwallets_sdk_platform_interface
+          flutter pub publish --force
+          
+          # Give pub.dev some time to process the package before the next publish
+          sleep 30 
+
+      - name: "Publish Release: Android"
+        if: ${{ steps.test-release-check.outputs.is-test == 'false' }}
+        run: |
+          echo ""
+          cd src/pay_digitalwallets_sdk_android
+          flutter pub publish --force
+
+      - name: "Publish Release: iOS"
+        if: ${{ steps.test-release-check.outputs.is-test == 'false' }}
+        run: |
+          echo ""
+          cd src/pay_digitalwallets_sdk_ios
+          flutter pub publish --force
+
+      - name: "Publish Release: Main Package"
+        if: ${{ steps.test-release-check.outputs.is-test == 'false' }}
+        run: |
+          echo ""
+          # Give pub.dev some time to process the previous packages before the next publish
+          sleep 30
+          cd src/pay_digitalwallets_sdk
+          flutter pub publish --force
