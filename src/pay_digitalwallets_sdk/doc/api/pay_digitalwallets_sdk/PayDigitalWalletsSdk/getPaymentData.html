@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getPaymentData method from the PayDigitalWalletsSdk class, for the Dart programming language.">
+  <title>getPaymentData method - PayDigitalWalletsSdk class - pay_digitalwallets_sdk library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">pay_digitalwallets_sdk</a></li>
+    <li><a href="../../pay_digitalwallets_sdk">pay_digitalwallets_sdk.dart</a></li>
+    <li><a href="../../pay_digitalwallets_sdk/PayDigitalWalletsSdk-class.html">PayDigitalWalletsSdk</a></li>
+    <li class="self-crumb">getPaymentData method</li>
+  </ol>
+  <div class="self-name">getPaymentData</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="pay_digitalwallets_sdk&#47;PayDigitalWalletsSdk-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">getPaymentData</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../pay_digitalwallets_sdk/PaymentData-class.html">PaymentData</a>?</span>&gt;</span></span>
+<span class="name ">getPaymentData</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getPaymentData-param-paymentParams"><span class="type-annotation"><a href="../../pay_digitalwallets_sdk/PaymentParameters-class.html">PaymentParameters</a></span> <span class="parameter-name">paymentParams</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Get payment data via Apple Pay or Google Pay</p>
+<p>If the digital wallet flow is successful, <a href="../../pay_digitalwallets_sdk/PaymentData-class.html">PaymentData</a> will be
+returned. If the return value is <code>null</code> the user canceled the operation.</p>
+<p>If an error occurs a <a href="https://api.flutter.dev/flutter/services/PlatformException-class.html">PlatformException</a> will be thrown. The
+<a href="https://api.flutter.dev/flutter/services/PlatformException/code.html">PlatformException.code</a> property on the exception can be used to
+determine what went wrong and take appropriate action. The
+<a href="https://api.flutter.dev/flutter/services/PlatformException/message.html">PlatformException.message</a> property can be used to get more information
+about what went wrong.</p>
+<p>When a <a href="https://api.flutter.dev/flutter/services/PlatformException-class.html">PlatformException</a> is thrown, the <a href="https://api.flutter.dev/flutter/services/PlatformException/code.html">PlatformException.code</a>
+property will be one of the following:</p>
+<ul>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/generalError-constant.html">ErrorCodes.generalError</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/unexpectedError-constant.html">ErrorCodes.unexpectedError</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/sdkNotConfigured-constant.html">ErrorCodes.sdkNotConfigured</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/invalidParameter-constant.html">ErrorCodes.invalidParameter</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/digitalWalletNotReady-constant.html">ErrorCodes.digitalWalletNotReady</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/lineItemTotalMismatch-constant.html">ErrorCodes.lineItemTotalMismatch</a></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/applePayUnsupported-constant.html">ErrorCodes.applePayUnsupported</a> <em><strong>(iOS Only)</strong></em></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/googlePayInternalError-constant.html">ErrorCodes.googlePayInternalError</a> <em><strong>(Android Only)</strong></em></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/googlePayDeveloperError-constant.html">ErrorCodes.googlePayDeveloperError</a> <em><strong>(Android Only)</strong></em></li>
+<li><a href="../../pay_digitalwallets_sdk/ErrorCodes/googlePayNetworkError-constant.html">ErrorCodes.googlePayNetworkError</a> <em><strong>(Android Only)</strong></em></li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;PaymentData?&gt; getPaymentData(
+  PaymentParameters paymentParams,
+) async {
+  return await _platform.getPaymentData(paymentParams);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">pay_digitalwallets_sdk</a></li>
+    <li><a href="../../pay_digitalwallets_sdk">pay_digitalwallets_sdk</a></li>
+    <li><a href="../../pay_digitalwallets_sdk/PayDigitalWalletsSdk-class.html">PayDigitalWalletsSdk</a></li>
+    <li class="self-crumb">getPaymentData method</li>
+</ol>
+
+    <h5>PayDigitalWalletsSdk class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    pay_digitalwallets_sdk
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
